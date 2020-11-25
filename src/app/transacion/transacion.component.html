@@ -1,0 +1,29 @@
+ <div style="display: flex;">
+    <div>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="onFilterChnage($event)" placeholder="Enter Text to fillter" #input>
+          </mat-form-field>
+    </div>
+    <div style="margin-left: auto;
+    padding-right: 20px;">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="addTransc()">add_circle_outline</mat-icon>
+    </div>
+
+ </div>
+
+          <div class="example-container mat-elevation-z8">
+              <mat-table [dataSource]="dataSource" matSort >
+                <ng-container matColumnDef="{{col.key}}"  *ngFor="let col of transactionsColumns" >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.header}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element" > {{col.colType === 'date' ? (element[col.key]  | date:'medium' )  : element[col.key]}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="columnNames; sticky: true;"></mat-header-row>
+            
+                <mat-row *matRowDef="let row; columns: columnNames;"></mat-row>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            
+              </mat-table>
+            </div>

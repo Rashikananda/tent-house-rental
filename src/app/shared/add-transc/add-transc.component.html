@@ -1,0 +1,48 @@
+
+  <form [formGroup]="addTransc" (ngSubmit)="onFormSubmit(addTransc.value)">
+
+    <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Customer Id</mat-label>
+        <mat-select formControlName="customer_id">
+          <mat-option *ngFor="let opt of data?.customerList" [value]="opt.customer_id">{{opt.customer_name}}</mat-option>
+        </mat-select>
+        <mat-error>
+            <span *ngIf="!addTransc.controls['customer_id'].valid && addTransc.controls['customer_id'].touched">Please Select Color</span>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Product Id</mat-label>
+        <mat-select formControlName="product_id">
+          <mat-option *ngFor="let opt of data?.summaryReport" [value]="opt.product_id">{{opt.product_title}}</mat-option>
+        </mat-select>
+        <mat-error>
+            <span *ngIf="!addTransc.controls['product_id'].valid && addTransc.controls['product_id'].touched">Please Select Product</span>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Transaction Type</mat-label>
+        <mat-select formControlName="transation_type">
+          <mat-option  value="IN">IN</mat-option>
+          <mat-option  value="OUT">OUT</mat-option>
+        </mat-select>
+        <mat-error>
+         
+
+            <span *ngIf="!addTransc.controls['transation_type'].valid && addTransc.controls['transation_type'].touched">Please Select Product</span>
+          </mat-error>
+      </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Quantity{{addTransc.controls.valid}}</mat-label>
+      <input matInput placeholder="quantity" formControlName="quantity" type="number" max="200"
+            >
+      <mat-error>
+        
+        <span *ngIf="!addTransc.controls['quantity'].valid && addTransc.controls['quantity'].touched ">Please enter valid QUANTITY </span>
+        <span *ngIf="!addTransc.controls['quantity'].valid && addTransc.controls['quantity'].touched ">Please enter valid QUANTITY </span>
+      </mat-error>
+    </mat-form-field> 
+    <div class="button-row">
+      <button type="submit" [mat-dialog-close]="addTransc.valid" [disabled]="!addTransc.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+    </div>
+  </form>

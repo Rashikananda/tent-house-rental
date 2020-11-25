@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tent-house-rental';
+  links = [{link: 'transc', header: 'Transaction'},
+  {link: 'reports', header: 'Report'},
+  {link: 'dashboard', header: 'Dashboard'},
+  {link: 'transc', header: 'Transaction'}]
 }

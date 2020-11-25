@@ -1,0 +1,47 @@
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" (selectedTabChange)="selectedTabChange($event)">
+    <mat-tab label="Inventory Summary"> 
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="onFilterChnage($event)" placeholder="Enter Text to fillter" #input>
+          </mat-form-field>
+          <div class="example-container mat-elevation-z8">
+              <mat-table [dataSource]="dataSource" matSort >
+                <ng-container matColumnDef="{{col.key}}"  *ngFor="let col of displayedSummaryColumns" >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.header}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element[col.key]}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="summaryColumnNames; sticky: true;"></mat-header-row>
+            
+                <mat-row *matRowDef="let row; columns: summaryColumnNames;"></mat-row>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            
+              </mat-table>
+            </div>
+
+
+    </mat-tab>
+    <mat-tab label="Inventory Detailed">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="onFilterChnage($event)" placeholder="Enter Text to fillter" #input>
+      </mat-form-field>
+      <div class="example-container mat-elevation-z8">
+          <mat-table [dataSource]="detailedDataSource" matSort >
+            <ng-container matColumnDef="{{col.key}}"  *ngFor="let col of displayedDetailedColumns" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.header}} </mat-header-cell>
+              <mat-cell *matCellDef="let element" > {{col.colType === 'date' ? (element[col.key]  | date:'medium' )  : element[col.key]}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="detailedColumnNames; sticky: true;"></mat-header-row>
+        
+            <mat-row *matRowDef="let row; columns: detailedColumnNames;"></mat-row>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        
+          </mat-table>
+        </div>
+
+    </mat-tab>
+  </mat-tab-group>
